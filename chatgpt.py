@@ -10,10 +10,10 @@ def generate_response(prompt):
     completions = openai.Completion.create(
         engine = "text-davinci-003",
         prompt = prompt,
-        max_tokens = 150,
+        max_tokens = st.secrets['OPENAPI_MAX_TOKENS'],
         n = 1,
         stop=[" Human:", " AI:"],
-        temperature=0.5,
+        temperature=st.secrets['OPENAPI_TEMP'],
     )
     message = completions.choices[0].text
     return message
