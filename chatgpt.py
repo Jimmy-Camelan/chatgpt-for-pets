@@ -12,7 +12,7 @@ def generate_response(prompt):
         prompt = prompt,
         max_tokens = 150,
         n = 1,
-        stop=[" Human:", " AI:"]
+        stop=[" Human:", " AI:"],
         temperature=0.5,
     )
     message = completions.choices[0].text
