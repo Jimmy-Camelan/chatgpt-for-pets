@@ -51,7 +51,7 @@ user_input = get_text()
 
 
 if user_input:
-    output = chatgpt_clone(user_input, history_input)
+    output = chatgpt_clone(user_input)
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output[0])
