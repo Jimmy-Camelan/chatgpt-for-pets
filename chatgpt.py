@@ -24,7 +24,7 @@ def openai_create(prompt):
 
 def chatgpt_clone(input, history):
     history = history or []
-    output = openai_create(inp)
+    output = openai_create(input)
     history.append((input, output))
     return history, history
 
