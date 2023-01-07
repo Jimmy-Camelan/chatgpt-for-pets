@@ -26,6 +26,7 @@ def chatgpt_clone(input, history):
     history = history or []
     s = list(sum(history, ()))
     print(s)
+    s.append(input)
     inp = ' '.join(s)
     output = openai_create(inp)
     history.append((input, output))
