@@ -5,25 +5,23 @@ import openai
 from config import open_api_key
 openai.api_key = open_api_key
 
-# openAI code
-def openai_create(prompt):
 
-    response = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=prompt,
-    temperature=0.9,
-    max_tokens=150,
-    frequency_penalty=0,
-    presence_penalty=0.6,
-    stop=[" Human:", " AI:"]
+def generate_response(prompt):
+    completions = openai.Completion.create(
+        engine = "text-davinci-003",
+        prompt = prompt,
+        max_tokens = 150,
+        n = 1,
+        stop=[" Human:", " AI:"]
+        temperature=0.5,
     )
-
-    return response.choices[0].text
+    message = completions.choices[0].text
+    return message
 
 
 def chatgpt_clone(input, history):
     history = history or []
-    output = openai_create(input)
+    output = generate_response(input)
     history.append((input, output))
     return history, history
 
