@@ -1,1 +1,2 @@
-open_api_key = 'YOUR_KEY'
+import os
+open_api_key = os.environ.get('OPENAPI_KEY')
