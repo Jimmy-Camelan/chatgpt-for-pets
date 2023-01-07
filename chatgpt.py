@@ -9,7 +9,7 @@ openai.api_key = open_api_key
 def openai_create(prompt):
 
     response = openai.Completion.create(
-    model="text-davinci-003",
+    model="text-curie-001",
     prompt=prompt,
     temperature=0.9,
     max_tokens=150,
@@ -26,7 +26,6 @@ def chatgpt_clone(input, history):
     history = history or []
     s = list(sum(history, ()))
     print(s)
-    s.append(input)
     inp = ' '.join(s)
     output = openai_create(inp)
     history.append((input, output))
