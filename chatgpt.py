@@ -34,11 +34,11 @@ def chatgpt_clone(input, history):
 
 # Streamlit App
 st.set_page_config(
-    page_title="Streamlit Chat - Demo",
-    page_icon=":robot:"
+    page_title="Camlist Pet Assistant",
+    page_icon=":dog:"
 )
 
-st.header("ChatGPT Clone with Streamlit")
+st.header("Talk to the AI Pet Assistant by Camlist")
 
 history_input = []
 
@@ -50,7 +50,7 @@ if 'past' not in st.session_state:
 
 
 def get_text():
-    input_text = st.text_input("You: ", key="input")
+    input_text = st.text_input("Ask me anything related to pets:", key="input")
     return input_text 
 
 
