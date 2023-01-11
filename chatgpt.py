@@ -7,6 +7,9 @@ openai.api_key = open_api_key
 
 
 def generate_response(prompt):
+    before_prompt = st.secrets['OPENAPI_PREPEND']
+    after_prompt = st.secrets['OPENAPI_APPEND']
+    prompt = "{}{}{}".format(before_prompt, prompt, after_prompt)
     completions = openai.Completion.create(
         engine = "text-davinci-003",
         prompt = prompt,
