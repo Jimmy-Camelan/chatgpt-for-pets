@@ -72,7 +72,7 @@ def get_ultra_real_sound(message):
     'Content-Type': 'application/json'
     }
     response = requests.request("POST", url, headers=headers, data=payload)
-    print(response.json())
+    print(response)
     return response.json()['payload']
 
 
