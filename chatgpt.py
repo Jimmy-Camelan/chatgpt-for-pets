@@ -21,10 +21,14 @@ def generate_response(prompt):
         temperature=st.secrets['OPENAPI_TEMP'],
     )
     message = completions.choices[0].text
-    if len(prompt) > 92:
-        st.audio("https://www.w3schools.com/tags/horse.mp3", format='audio/mpeg')
-    else:
-        st.audio("https://www.w3schools.com/tags/horse.mp3", format='audio/mpeg')
+    audio_player = st.empty()
+    html_string = """
+        <audio controls autoplay>
+          <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
+        </audio>
+        """
+    audio_player.markdown(html_string, unsafe_allow_html=True)
+    audio_player.empty()
     return message
 
 
