@@ -21,14 +21,6 @@ def generate_response(prompt):
         temperature=st.secrets['OPENAPI_TEMP'],
     )
     message = completions.choices[0].text
-    audio_player = st.empty()
-    html_string = """
-        <audio controls autoplay>
-          <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
-        </audio>
-        """
-    audio_player.markdown(html_string, unsafe_allow_html=True)
-    audio_player.empty()
     return message
 
 
@@ -65,9 +57,17 @@ user_input = get_text()
 
 if user_input:
     output = generate_response(user_input)
+    audio_player = st.empty()
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
+    html_string = """
+        <audio controls autoplay>
+          <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
+        </audio>
+        """
+    audio_player.markdown(html_string, unsafe_allow_html=True)
+    audio_player.empty()
 
 if st.session_state['generated']:
 
