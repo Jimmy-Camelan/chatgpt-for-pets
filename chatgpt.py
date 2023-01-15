@@ -72,7 +72,8 @@ def get_ultra_real_sound(message):
     'Content-Type': 'application/json'
     }
     response = requests.request("POST", url, headers=headers, data=payload)
-    return respons.json()['payload']
+    print(response.json())
+    return response.json()['payload']
 
 
 if user_input:
