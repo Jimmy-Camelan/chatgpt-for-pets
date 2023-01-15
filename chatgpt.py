@@ -62,12 +62,20 @@ if user_input:
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
     html_string = """
-        <audio controls autoplay>
-          <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
-        </audio>
-        """
-    audio_player.markdown(html_string, unsafe_allow_html=True)
-    audio_player.empty()
+            <audio id='audio' controls autoplay>
+              <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+            <script type="application/javascript">
+            const myTimeout = setTimeout(playAudio, 5000);
+            function playAudio() {
+              console.log("helloooooo");
+              document.getElementById('audio').play();
+            }
+            </script>
+                        """
+    sound = st.empty()
+    sound.markdown(html_string, unsafe_allow_html=True)
 
 if st.session_state['generated']:
 
