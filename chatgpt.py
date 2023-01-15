@@ -22,9 +22,9 @@ def generate_response(prompt):
     )
     message = completions.choices[0].text
     if len(prompt) > 92:
-        st.audio("https://doc-audio.streamlit.app/~/+/media/bd783c112d70d61d823e6cc2ba07a910ab7f2ceb3413f469fa4b4e57.oga", format='audio/ogg')
+        st.audio("https://www.w3schools.com/tags/horse.mp3", format='audio/mpeg')
     else:
-        st.audio("https://upload.wikimedia.org/wikipedia/commons/1/1f/Netherworld_Shanty_%28MacLeod%2C_Kevin_%29_%28ISRC_USUAN1100138%29.oga", format='audio/ogg')
+        st.audio("https://www.w3schools.com/tags/horse.mp3", format='audio/mpeg')
     return message
 
 
