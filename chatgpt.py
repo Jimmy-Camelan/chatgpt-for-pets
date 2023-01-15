@@ -84,7 +84,7 @@ if user_input:
     st.session_state.generated.append(output)
     html_string = """
             <audio id='audio' controls autoplay>
-              <source src="{}" type="audio/mpeg">
+""" + "<source src=\"{}\" type=\"audio/mpeg\">".format(TTS_file) + """
               Your browser does not support the audio element.
             </audio>
             <script type="application/javascript">
@@ -94,7 +94,7 @@ if user_input:
               document.getElementById('audio').play();
             }
             </script>
-                        """.format(TTS_file)
+"""
     sound = st.empty()
     sound.markdown(html_string, unsafe_allow_html=True)
 
