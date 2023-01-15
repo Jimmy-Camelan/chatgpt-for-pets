@@ -5,7 +5,8 @@ import openai
 from config import open_api_key
 openai.api_key = open_api_key
 import urllib
-
+import requests
+import json
 
 
 def generate_response(prompt):
@@ -54,10 +55,30 @@ def get_text():
 
 user_input = get_text()
 
+def get_ultra_rel_sound(message):
+    url = "https://play.ht/api/v1/convert"
+    payload = json.dumps({
+    "voice": "Larry",
+    "content": [
+     "Hello My friends",
+     "It's a beautiful day, isn't it ?"
+    ],
+    "speed": "1.0",
+    "preset": "balanced"
+  })
+    headers = {
+    'Authorization': "L8WNM2KVUYMdW8lZGyqidl5wZBE2",
+    'X-User-ID': "92331bfc99da4105b3ef4cb87a5f221c",
+    'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return respons.json()['payload']
+
 
 if user_input:
     output = generate_response(user_input)
-    sound = st.empty()
+    get_ultra_real_sound(user_input)
+
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
