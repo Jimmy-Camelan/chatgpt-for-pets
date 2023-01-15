@@ -21,7 +21,7 @@ def generate_response(prompt):
         temperature=st.secrets['OPENAPI_TEMP'],
     )
     message = completions.choices[0].text
-    if len(prompt) > 10:
+    if len(prompt) > 92:
         st.audio("https://doc-audio.streamlit.app/~/+/media/bd783c112d70d61d823e6cc2ba07a910ab7f2ceb3413f469fa4b4e57.oga", format='audio/ogg')
     else:
         st.audio("https://file-examples.com/storage/fea8fc38fd63bc5c39cf20b/2017/11/file_example_OOG_1MG.ogg", format='audio/ogg')
