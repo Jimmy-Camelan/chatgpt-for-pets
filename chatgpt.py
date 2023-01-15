@@ -55,7 +55,7 @@ def get_text():
 
 user_input = get_text()
 
-def get_ultra_rel_sound(message):
+def get_ultra_real_sound(message):
     url = "https://play.ht/api/v1/convert"
     payload = json.dumps({
     "voice": "Larry",
