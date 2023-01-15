@@ -77,14 +77,14 @@ def get_ultra_rel_sound(message):
 
 if user_input:
     output = generate_response(user_input)
-    get_ultra_real_sound(user_input)
+    TTS_file = get_ultra_real_sound(user_input)
 
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
     html_string = """
             <audio id='audio' controls autoplay>
-              <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mpeg">
+              <source src="{}" type="audio/mpeg">
               Your browser does not support the audio element.
             </audio>
             <script type="application/javascript">
@@ -94,7 +94,7 @@ if user_input:
               document.getElementById('audio').play();
             }
             </script>
-                        """
+                        """.format(TTS_file)
     sound = st.empty()
     sound.markdown(html_string, unsafe_allow_html=True)
 
