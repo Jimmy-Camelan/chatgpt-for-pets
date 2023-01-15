@@ -4,6 +4,8 @@ from streamlit_chat import message
 import openai
 from config import open_api_key
 openai.api_key = open_api_key
+import urllib
+
 
 
 def generate_response(prompt):
@@ -19,6 +21,7 @@ def generate_response(prompt):
         temperature=st.secrets['OPENAPI_TEMP'],
     )
     message = completions.choices[0].text
+    st.audio("https://doc-audio.streamlit.app/~/+/media/bd783c112d70d61d823e6cc2ba07a910ab7f2ceb3413f469fa4b4e57.oga", format='audio/ogg')
     return message
 
 
