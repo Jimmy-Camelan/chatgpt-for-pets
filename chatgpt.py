@@ -7,6 +7,7 @@ from google.oauth2 import service_account
 import json
 import os
 from config import open_api_key
+import base64
 openai.api_key = open_api_key
 
 def google_auth(sa, sa_private_key):
