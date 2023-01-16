@@ -134,6 +134,9 @@ if st.session_state['generated']:
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
+      <script type='application/javascript'>
+      document.getElementById('audio').play();
+      </script>
 """
     sound = st.empty()
     sound.markdown(html_string, unsafe_allow_html=True)
