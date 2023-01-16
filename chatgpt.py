@@ -145,6 +145,7 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         html_string = """
+        <hr/>
 <script type='application/javascript'>
           audio_src = document.getElementById('audio_src')
           audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
