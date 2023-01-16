@@ -135,9 +135,6 @@ if st.session_state['generated']:
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
-      <script type='application/javascript'>
-      document.getElementById('audio').play();
-      </script>
 """
     sound = st.empty()
     sound.markdown(html_string, unsafe_allow_html=True)
@@ -146,7 +143,6 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         js_to_run = """
-console.log("hellooooooo!);
 function reloadAudio(){
 audio_player = document.getElementById('audio')
 audio_src = document.getElementById('audio_src')
@@ -154,6 +150,7 @@ audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
 audio_player.load();
 audio_player.play();
 }
+reloadAudio();
 """
         st_javascript(js_to_run)
          
