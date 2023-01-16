@@ -98,8 +98,7 @@ def get_audio_str(file_name):
 if user_input:
     output = generate_response(user_input)
     text_to_speech(output)
-    get_B64("output.mp3"):
-    TTS_file = get_B64(user_input)
+    TTS_file = get_audio_str(user_input)
 
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
