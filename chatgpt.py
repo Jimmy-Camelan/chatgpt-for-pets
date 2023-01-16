@@ -2,6 +2,10 @@ import streamlit as st
 from streamlit_chat import message
 
 import openai
+from google.cloud import texttospeech
+from google.oauth2 import service_account
+import json
+import os
 from config import open_api_key
 openai.api_key = open_api_key
 
