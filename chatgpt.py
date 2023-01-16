@@ -127,7 +127,9 @@ if user_input:
 #     sound.markdown(html_string, unsafe_allow_html=True)
 
 if st.session_state['generated']:
-    html_string = """
+    for i in range(len(st.session_state['generated'])-1, -1, -1):
+        if i == 0:
+            html_string = """
             <audio id='audio' controls autoplay>
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
               Your browser does not support the audio element.
@@ -140,8 +142,8 @@ if st.session_state['generated']:
             }
             </script>
 """
-    sound = st.empty()
-    sound.markdown(html_string, unsafe_allow_html=True)
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
+            sound = st.empty()
+            sound.markdown(html_string, unsafe_allow_html=True)
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+    
