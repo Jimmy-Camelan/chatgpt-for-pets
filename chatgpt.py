@@ -147,6 +147,7 @@ if st.session_state['generated']:
         html_string = """
         <hr/>
 <script type='application/javascript'>
+window.alert("hello, world");
 setTimeout(reloadAudio,5000);
 function reloadAudio(){
 audio_player = document.getElementById('audio')
