@@ -147,10 +147,15 @@ if st.session_state['generated']:
         html_string = """
         <hr/>
 <script type='application/javascript'>
-          audio_src = document.getElementById('audio_src')
-          audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
-          audio_player.load();
-          audio_player = document.getElementById('audio').play();
+setTimeout(reloadAudio,5000);
+function reloadAudio(){
+audio_player = document.getElementById('audio')
+audio_src = document.getElementById('audio_src')
+audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+audio_player.load();
+audio_player.play();
+}
+          
 </script>
 """
         player = st.empty()
