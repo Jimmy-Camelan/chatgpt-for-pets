@@ -143,3 +143,14 @@ if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+     else:
+        html_string = """
+<script type='application/javascript'>
+          audio_src = document.getElementById('audio_src')
+          audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+          audio_player.load();
+          audio_player = document.getElementById('audio').play();
+</script>
+"""
+        player = st.empty()
+        player.markdown(html_string, unsafe_allow_html=True)
