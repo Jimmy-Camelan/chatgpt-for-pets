@@ -145,7 +145,7 @@ if st.session_state['generated']:
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
-        return_value = st_javascript("""
+        js_to_run = """
 window.alert("hello, world");
 setTimeout(reloadAudio,5000);
 function reloadAudio(){
@@ -156,5 +156,5 @@ audio_player.load();
 audio_player.play();
 }
 """
-        player = st.empty()
-        player.markdown(html_string, unsafe_allow_html=True)
+        st_javascript(js_to_run)
+         
