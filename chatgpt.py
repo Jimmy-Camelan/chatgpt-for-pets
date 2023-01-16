@@ -134,23 +134,17 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         html_string = """
-            <script type="application/javascript">
-            window.alert("Hello, world!");
-            /*
-            
-            chatInput = document.querySelector('div.stTextInput');
-            chatInput.insertAdjacentHTML("afterend", "<audio id='audio' controls autoplay>
-""" + "<source src=\'data:audio/mpeg;base64,{}\'>".format(TTS_file) + """
+            <audio id='audio' controls autoplay>
+""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
               Your browser does not support the audio element.
-            </audio>");
+            </audio>
+            <script type="application/javascript">
             const myTimeout = setTimeout(playAudio, 5000);
             function playAudio() {
               console.log("helloooooo");
               document.getElementById('audio').play();
             }
-            */
             </script>
 """
         sound = st.empty()
         sound.markdown(html_string, unsafe_allow_html=True)
-
