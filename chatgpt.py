@@ -146,8 +146,7 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         js_to_run = """
-window.alert("hello, world");
-setTimeout(reloadAudio,5000);
+console.log("hellooooooo!);
 function reloadAudio(){
 audio_player = document.getElementById('audio')
 audio_src = document.getElementById('audio_src')
