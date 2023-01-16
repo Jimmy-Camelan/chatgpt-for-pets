@@ -128,7 +128,7 @@ if user_input:
 
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
-        if i == 0:
+        if i == (len(st.session_state['generated'])-1):
             html_string = """
             <audio id='audio' controls autoplay>
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
