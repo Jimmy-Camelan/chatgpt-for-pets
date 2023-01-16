@@ -143,14 +143,7 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         js_to_run = """
-function reloadAudio(){
-audio_player = document.getElementById('audio')
-audio_src = document.getElementById('audio_src')
-audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
-audio_player.load();
-audio_player.play();
-}
-reloadAudio();
+console.log("hello, world!);
 """
         st_javascript(js_to_run)
          
