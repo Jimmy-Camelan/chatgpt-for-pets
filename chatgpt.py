@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
-from streamlit_javascript import st_javascript
+# from streamlit_javascript import st_javascript
 
 import openai
 from google.cloud import texttospeech
@@ -130,20 +130,21 @@ if user_input:
 #     sound.markdown(html_string, unsafe_allow_html=True)
 
 if st.session_state['generated']:
-    html_string = """
+    for i in range(len(st.session_state['generated'])-1, -1, -1):
+        message(st.session_state["generated"][i], key=str(i))
+        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+    else:
+        html_string = """
       <audio id='audio' controls autoplay>
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
 """
-    sound = st.empty()
-    sound.markdown(html_string, unsafe_allow_html=True)
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
-        message(st.session_state["generated"][i], key=str(i))
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
-    else:
-        js_to_run = """
-console.log("hello, world!);
-"""
-        st_javascript(js_to_run)
+        sound = st.empty()
+        sound.markdown(html_string, unsafe_allow_html=True)
+        
+#         js_to_run = """
+# console.log("hello, world!);
+# """
+#         st_javascript(js_to_run)
          
