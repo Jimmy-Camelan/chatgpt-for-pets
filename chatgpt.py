@@ -31,7 +31,7 @@ def text_to_speech(text_to_convert):
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
         language_code="en-US",
-        name="en-US-Standard-C",
+        name="en-US-Neural2-F",
         ssml_gender=texttospeech.SsmlVoiceGender.FEMALE,
     )
 
