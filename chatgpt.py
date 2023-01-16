@@ -110,38 +110,40 @@ if user_input:
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
-    html_string = """
-            <audio id='audio' controls autoplay>
-""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
-              Your browser does not support the audio element.
-            </audio>
-            <script type="application/javascript">
-            const myTimeout = setTimeout(playAudio, 5000);
-            function playAudio() {
-              console.log("helloooooo");
-              document.getElementById('audio').play();
-            }
-            </script>
-"""
-    sound = st.empty()
-    sound.markdown(html_string, unsafe_allow_html=True)
+#     html_string = """
+#             <audio id='audio' controls autoplay>
+# """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+#               Your browser does not support the audio element.
+#             </audio>
+#             <script type="application/javascript">
+#             const myTimeout = setTimeout(playAudio, 5000);
+#             function playAudio() {
+#               console.log("helloooooo");
+#               document.getElementById('audio').play();
+#             }
+#             </script>
+# """
+#     sound = st.empty()
+#     sound.markdown(html_string, unsafe_allow_html=True)
 
 if st.session_state['generated']:
-    html_string = """
-            <audio id='audio' controls autoplay>
-""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
-              Your browser does not support the audio element.
-            </audio>
-            <script type="application/javascript">
-            const myTimeout = setTimeout(playAudio, 5000);
-            function playAudio() {
-              console.log("helloooooo");
-              document.getElementById('audio').play();
-            }
-            </script>
-"""
-    sound = st.empty()
-    sound.markdown(html_string, unsafe_allow_html=True)
+    
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+    else:
+        html_string = """
+            <audio id='audio' controls autoplay>
+""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+              Your browser does not support the audio element.
+            </audio>
+            <script type="application/javascript">
+            const myTimeout = setTimeout(playAudio, 5000);
+            function playAudio() {
+              console.log("helloooooo");
+              document.getElementById('audio').play();
+            }
+            </script>
+"""
+        sound = st.empty()
+        sound.markdown(html_string, unsafe_allow_html=True)
