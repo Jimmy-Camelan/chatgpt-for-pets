@@ -40,12 +40,10 @@ def text_to_speech(text_to_convert):
     # Perform the text-to-speech request on the text input with the selected
     # voice parameters and audio file type
     response = client.synthesize_speech(
-        input=synthesis_input, voice=voice, audio_config=audio_config
-    )
+        input=synthesis_input, voice=voice, audio_config=audio_config)
     with open("output.mp3", "wb") as out:
-    # Write the response to the output file.
-    out.write(response.audio_content)
-    print('Audio content written to file "output.mp3"')
+        out.write(response.audio_content)
+        print('Audio content written to file "output.mp3"')
     
     return response
 
