@@ -135,6 +135,9 @@ if st.session_state['generated']:
     else:
         html_string = """
             <script type="application/javascript">
+            window.alert("Hello, world!");
+            /*
+            
             chatInput = document.querySelector('div.stTextInput');
             chatInput.insertAdjacentHTML("afterend", "<audio id='audio' controls autoplay>
 """ + "<source src=\'data:audio/mpeg;base64,{}\'>".format(TTS_file) + """
@@ -145,6 +148,7 @@ if st.session_state['generated']:
               console.log("helloooooo");
               document.getElementById('audio').play();
             }
+            */
             </script>
 """
         sound = st.empty()
