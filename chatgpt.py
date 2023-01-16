@@ -143,7 +143,7 @@ if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
-     else:
+    else:
         html_string = """
 <script type='application/javascript'>
           audio_src = document.getElementById('audio_src')
