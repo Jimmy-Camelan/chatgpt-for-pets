@@ -102,7 +102,7 @@ def get_audio_str(file_name):
 if user_input:
     output = generate_response(user_input)
     text_to_speech(output)
-    TTS_file = get_audio_str("output.mp3")
+    TTS_file = get_audio_str("./output.mp3")
 
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
