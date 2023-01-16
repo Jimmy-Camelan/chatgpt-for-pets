@@ -140,8 +140,8 @@ if st.session_state['generated']:
             }
             </script>
 """
-        sound = st.empty()
-        sound.markdown(html_string, unsafe_allow_html=True)
+    sound = st.empty()
+    sound.markdown(html_string, unsafe_allow_html=True)
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
