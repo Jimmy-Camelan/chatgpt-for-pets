@@ -4,9 +4,43 @@ from streamlit_chat import message
 import openai
 from config import open_api_key
 openai.api_key = open_api_key
-import urllib
-import requests
-import json
+
+def google_auth(sa, sa_private_key):
+    SA_str = sa
+    info = json.loads(SA_str)
+    info['private_key'] = sa_private_key
+    credentials = service_account.Credentials.from_service_account_info(info)
+    client = texttospeech.TextToSpeechClient(credentials=credentials)
+    return client
+
+def text_to_speech(text_to_convert):
+    sa = os.environ.get('SERVICE_ACCOUNT')
+    sa_private_key = os.environ.get('SA_PRIVATE_KEY')
+    client = google_auth(sa, sa_private_key)
+
+
+    # Set the text input to be synthesized
+    synthesis_input = texttospeech.SynthesisInput(text=text_to_convert)
+
+    # Build the voice request, select the language code ("en-US") and the ssml
+    # voice gender ("neutral")
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+    )
+
+    # Select the type of audio file you want returned
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3
+    )
+
+    # Perform the text-to-speech request on the text input with the selected
+    # voice parameters and audio file type
+    response = client.synthesize_speech(
+        input=synthesis_input, voice=voice, audio_config=audio_config
+    )
+    
+    return response
+
 
 
 def generate_response(prompt):
@@ -55,37 +89,24 @@ def get_text():
 
 user_input = get_text()
 
-def get_ultra_real_sound(message):
-    url = "https://play.ht/api/v1/convert"
-    payload = json.dumps({
-    "voice": "Larry",
-    "content": [
-     "Hello My friends",
-     "It's a beautiful day, isn't it ?"
-    ],
-    "speed": "1.0",
-    "preset": "balanced"
-  })
-    headers = {
-    'Authorization': "L8WNM2KVUYMdW8lZGyqidl5wZBE2",
-    'X-User-ID': "92331bfc99da4105b3ef4cb87a5f221c",
-    'Content-Type': 'application/json'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload)
-    print(response)
-    return response.json()['payload']
-
+def get_audio_str(file_name):
+    aud_file= open(file_name,"rb")
+    aud_data_binary = aud_file.read()
+    aud_data = (base64.b64encode(aud_data_binary)).decode('ascii')
+    return aud_data
 
 if user_input:
     output = generate_response(user_input)
-    TTS_file = get_ultra_real_sound(user_input)
+    text_to_speech(output)
+    get_B64("output.mp3"):
+    TTS_file = get_B64(user_input)
 
     history_input.append([user_input, output])
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output)
     html_string = """
             <audio id='audio' controls autoplay>
-""" + "<source src=\"{}\" type=\"audio/mpeg\">".format(TTS_file) + """
+""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
               Your browser does not support the audio element.
             </audio>
             <script type="application/javascript">
