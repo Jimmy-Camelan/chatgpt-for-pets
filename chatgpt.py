@@ -131,17 +131,10 @@ if user_input:
 if st.session_state['generated']:
     html_string = """
       <audio id='audio' controls autoplay>
-    """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
-      <script type="application/javascript">
-      const myTimeout = setTimeout(playAudio, 5000);
-      function playAudio() {
-        console.log("helloooooo");
-        document.getElementById('audio').play();
-      }
-      </script>
-    """
+"""
     sound = st.empty()
     sound.markdown(html_string, unsafe_allow_html=True)
     for i in range(len(st.session_state['generated'])-1, -1, -1):
