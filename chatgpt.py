@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
-# from streamlit_javascript import st_javascript
+from streamlit_javascript import st_javascript
 
 import openai
 from google.cloud import texttospeech
@@ -130,31 +130,31 @@ if user_input:
 #     sound.markdown(html_string, unsafe_allow_html=True)
 
 if st.session_state['generated']:
+    html_string = """
+      <audio id='audio' controls autoplay>
+""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+        Your browser does not support the audio element.
+      </audio>
+      <script type='application/javascript'>
+      document.getElementById('audio').play();
+      </script>
+"""
+    sound = st.empty()
+    sound.markdown(html_string, unsafe_allow_html=True)
     for i in range(len(st.session_state['generated'])-1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
-        html_string = """
-        <div>
-        <style type="text/css" scoped>
-        audio{
-        width: 30%;
-        }
-        @media only screen and (min-width: 400px) {
-        audio{
-        width:10%
-        }
-    </style>
-      <audio id='audio' controls autoplay style='position:fixed; top:160px; right:30px;'>
-""" + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
-        Your browser does not support the audio element.
-      </audio>
+        return_value = st_javascript("""
+window.alert("hello, world");
+setTimeout(reloadAudio,5000);
+function reloadAudio(){
+audio_player = document.getElementById('audio')
+audio_src = document.getElementById('audio_src')
+audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
+audio_player.load();
+audio_player.play();
+}
 """
-        sound = st.empty()
-        sound.markdown(html_string, unsafe_allow_html=True)
-        
-#         js_to_run = """
-# console.log("hello, world!);
-# """
-#         st_javascript(js_to_run)
-         
+        player = st.empty()
+        player.markdown(html_string, unsafe_allow_html=True)
