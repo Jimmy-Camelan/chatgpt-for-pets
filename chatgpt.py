@@ -135,7 +135,7 @@ if st.session_state['generated']:
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
         html_string = """
-      <audio id='audio' controls autoplay style='position:fixed; top:50px; right:30px'>
+      <audio id='audio' controls autoplay style='position:fixed; top:150px; right:30px;width:30%;'>
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
