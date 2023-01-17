@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_chat import message
-from streamlit_javascript import st_javascript
 
 import openai
 from google.cloud import texttospeech
@@ -145,7 +144,9 @@ if st.session_state['generated']:
         message(st.session_state["generated"][i], key=str(i))
         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
     else:
-        return_value = st_javascript("""
+        html_string = """
+        <hr/>
+<script type='application/javascript'>
 window.alert("hello, world");
 setTimeout(reloadAudio,5000);
 function reloadAudio(){
@@ -155,6 +156,8 @@ audio_src = """ + "\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
 audio_player.load();
 audio_player.play();
 }
+          
+</script>
 """
         player = st.empty()
         player.markdown(html_string, unsafe_allow_html=True)
