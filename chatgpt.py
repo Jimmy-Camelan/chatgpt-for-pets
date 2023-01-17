@@ -137,12 +137,15 @@ if st.session_state['generated']:
         html_string = """
         <div>
         <style type="text/css" scoped>
+        audio{
+        width: 30%;
+        }
         @media only screen and (min-width: 400px) {
         audio{
         width:10%
         }
     </style>
-      <audio id='audio' controls autoplay style='position:fixed; top:160px; right:30px;width:30%;'>
+      <audio id='audio' controls autoplay style='position:fixed; top:160px; right:30px;'>
 """ + "<source src=\"data:audio/mpeg;base64,{}\">".format(TTS_file) + """
         Your browser does not support the audio element.
       </audio>
